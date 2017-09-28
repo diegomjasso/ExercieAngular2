@@ -4,7 +4,7 @@ import { Http, Response,	Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Employee } from './employee';
 import 'rxjs/add/operator/map';
-
+import 'rxjs/add/operator/toPromise';
 /*
 	var employeesList: Array<{name: string, date_joing: string,	departament: string}> = [
 							{name:	'Jack Martin',	date_joing:	'8/20/2015',	departament:	'IT'},
@@ -17,20 +17,16 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export	class ApplicationServices	{
-	urlJson	= "./employees.json";
+	urlJson	= "https://api.myjson.com/bins/u3vvl";
 	constructor(private http : Http){}
 
-	getEmployees(): Observable<Employee[]>{
-	let employees$ = this.http
-	  .get(this.urlJson, {headers: this.getHeaders()})
-	  .map(mapEmployees);
-	  return employees$;
+	getEmployees(): Promise<Employee>{
+	return this.http
+	 	.get(this.urlJson, {headers: this.getHeaders()})
+		.toPromise()
+     	.then(mapEmployees)
+     	.catch(handleError);
 	};
-
-	getConfiguration = (): Observable<Response> => {
-        console.log("In getConfiguration of ConfigurationService");
-        return this.http.get('app/employees.json').map(res => res.json());
-    }
 
 	private getHeaders()	{
 		// I included these headers because otherwise FireFox
@@ -41,9 +37,17 @@ export	class ApplicationServices	{
 	}
 }
 
-function mapEmployees(response:Response): Employee[]{
+function handleError(error: any){
+  // log error
+  // could be something more sofisticated
+  let errorMsg = error.message || `Yikes! There was a problem with our hyperdrive device and we couldn't retrieve your data!`
+  // instead of Observable we return a rejected Promise
+  return Promise.reject(errorMsg);
+}
+
+function mapEmployees(response:Response): Employee{
    // toPerson looks just like in the previous example
-   return response.json().results.map(toEmployee);
+   return response.json().map(toEmployee);
 }
 
 function toEmployee(r:any): Employee{
@@ -52,7 +56,6 @@ function toEmployee(r:any): Employee{
   	date_joing:	r.date_joing,
   	departament: r.departament
   });
-  console.log('Parsed employee:', employee);
   return employee;
 }
 

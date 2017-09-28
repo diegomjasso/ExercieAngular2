@@ -1,5 +1,6 @@
 import	{	Component,	OnInit	}	from	'@angular/core';
 import	{	ApplicationServices }	from  '../application.services';
+import { Employee } from '../employee';
 
 @Component({
 	selector:	'employee-details',
@@ -21,34 +22,24 @@ export class EmployeeDetailsComponent implements OnInit	{
 	cDate1Day;
 	cDate1Week;
 	cDateTwoYears;
-	
+	error;
 
 	constructor(	private applicationServices: ApplicationServices) {}
 
   ngOnInit() {
-    this.applicationServices.getEmployees().subscribe(e => this.employees = e);
-    this.applicationServices.getConfiguration().subscribe(
-            (res) => {
-                this.employees = res;
-                console.log("after reading");
-                console.log(this.employees);
-            },
-            (error) => console.log("error : " + error),
-            () => console.log('Error in GetApplication in Login : ' + Error)
-        );;
+    this.applicationServices.getEmployees().then((data)	=>	{
+    	this.employees = data;
+    	this.cDate = new Date();
+			this.cDate1Day	=	this.get1Day();
+			this.cDate1Week	=	this.getLastWeek();
+			this.cDateTwoYears	=	this.getTwoYears();
+			this.setTheNames();
+
+    });
   }
 
-	//constructor(private applicationServices:	ApplicationServices)	{
-		//this.employees	=	this.applicationServices.getEmployees().subscribe(result => console.log(result));
-	/*	this.cDate = new Date();
-		this.cDate1Day	=	this.get1Day();
-		this.cDate1Week	=	this.getLastWeek();
-		this.cDateTwoYears	=	this.getTwoYears();
-		this.setTheNames();*/
-		
-	//};
-
 	setTheNames()	{
+
 		this.employees_names_twoYears = this.doValidation(	this.cDateTwoYears);
 		this.employees_names_lastWeek	= this.doValidation(	this.cDate1Week);
 		this.employees_names_today = this.doValidation(	this.cDate1Day);
@@ -72,7 +63,7 @@ export class EmployeeDetailsComponent implements OnInit	{
 	}
 
 	doValidation(	limitTime)	{
-		let	result: string[]	=	[];
+		let	result = [];
 		for (var _i = 0; _i < this.employees.length; _i++) {
 			let tempDate = new Date(	this.employees[_i].date_joing);
 			if (	tempDate	<=	limitTime) {
