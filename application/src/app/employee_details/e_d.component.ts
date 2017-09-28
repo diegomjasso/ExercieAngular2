@@ -13,7 +13,6 @@ import { Employee } from '../employee';
 
 export class EmployeeDetailsComponent implements OnInit	{
 	title	=	"Employee Details"
-	groups	=	[	"Today",	"Last Week",	"Two Year Back"];
 	employees;
 	employees_names_today;
 	employees_names_lastWeek;
@@ -26,17 +25,16 @@ export class EmployeeDetailsComponent implements OnInit	{
 
 	constructor(	private applicationServices: ApplicationServices) {}
 
-  ngOnInit() {
-    this.applicationServices.getEmployees().then((data)	=>	{
-    	this.employees = data;
-    	this.cDate = new Date();
-			this.cDate1Day	=	this.get1Day();
-			this.cDate1Week	=	this.getLastWeek();
-			this.cDateTwoYears	=	this.getTwoYears();
-			this.setTheNames();
-
-    });
-  }
+	ngOnInit() {
+		this.applicationServices.getEmployees().then((data)	=>	{
+			this.employees = data;
+			this.cDate = new Date();
+				this.cDate1Day	=	this.get1Day();
+				this.cDate1Week	=	this.getLastWeek();
+				this.cDateTwoYears	=	this.getTwoYears();
+				this.setTheNames();
+		});
+	}
 
 	setTheNames()	{
 

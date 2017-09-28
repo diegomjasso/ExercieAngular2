@@ -1,0 +1,13 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+    "../src/app/dashboard/dashboard.component.spec.ts",
+    "../src/app/employee_details/e_d.component.spec.ts",
+    "../src/app/app.component.spec.ts"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}
