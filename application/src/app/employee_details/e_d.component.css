@@ -1,0 +1,48 @@
+.title{
+	color: blue;
+}
+.sub-title	{
+	color: DodgerBlue;
+}
+ol	{
+	margin-left: 50px;
+	padding:	20px;
+	padding-left: 50px;
+	border-style: solid;
+	border-color: darkgreen;
+	background: OliveDrab;
+	opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+ol.two-years	{
+	border-radius: 0px 0px 10px 10px;
+	border-width: 0px 3px 3px 3px;
+}
+
+ol.last-week	{
+	border-width: 0px 3px 0px 3px;
+}
+
+ol.today	{
+	border-radius: 10px 10px 0px 0px;
+	border-width: 3px 3px 0px 3px;	
+}
+
+li	{
+	text-align: left;
+	color: black;
+	padding-left: 10px;
+	border-bottom-style: solid;
+	border-top-style: solid;
+	border-color: GreenYellow;
+	border-width: 1px;
+}
+
+li:first-child {
+	border-top-style: none;
+}
+
+li:last-child {
+	border-bottom-style: none;
+}
