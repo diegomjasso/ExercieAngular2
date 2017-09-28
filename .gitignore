@@ -57,3 +57,40 @@ typings/
 # dotenv environment variables file
 .env
 
+
+
+
+# Created by https://www.gitignore.io/api/angular
+
+### Angular ###
+## Angular ##
+# compiled output
+/application/dist
+/application/tmp
+/application/app/**/*.js
+/application/app/**/*.js.map
+
+# dependencies
+/application/node_modules
+/application/bower_components
+
+# IDEs and editors
+/application/.idea
+
+# misc
+/application/.sass-cache
+/application/connect.lock
+/application/coverage/*
+/application/libpeerconnection.log
+/application/npm-debug.log
+/application/testem.log
+/typings
+
+# e2e
+/application/e2e/*.js
+/application/e2e/*.map
+
+#System Files
+/application/.DS_Store
+
+# End of https://www.gitignore.io/api/angular
