@@ -23,9 +23,8 @@ import	{	ApplicationServices }	from  './application.services';
 	providers:	[
 		ApplicationServices
 	],
-	bootstrap:	[
-		AppComponent
-	]
+	bootstrap:	[	AppComponent	],
+	schemas: []
 })
 
 export	class	AppModule	{	}

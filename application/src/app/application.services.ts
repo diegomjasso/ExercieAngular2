@@ -1,19 +1,10 @@
-import { Injectable } from '@angular/core';
-
-import { Http, Response,	Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Employee } from './employee';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-/*
-	var employeesList: Array<{name: string, date_joing: string,	departament: string}> = [
-							{name:	'Jack Martin',	date_joing:	'8/20/2015',	departament:	'IT'},
-							{name:	'Frank Yarnall',	date_joing:	'9/27/2017',	departament:	'IT'},
-							{name:	'Collin Day',	date_joing:	'9/20/2017',	departament:	'IT'},
-							{name:	'Sumit Kumar',	date_joing:	'9/20/2015',	departament:	'CS'},
-							{name:	'Kevin Quinn',	date_joing:	'9/20/2017',	departament:	'CS'},
-							{name:	'Ram Kumar',	date_joing:	'9/20/2017',	departament:	'EC'},
-							{name:	'Rajat Saini',	date_joing:	'9/27/2017',	departament:	'EC'}	];	*/
+import	{	Injectable	}	from	'@angular/core';
+import	{	HttpModule	}	from	'@angular/http';
+import	{	Http,	Response,	Headers	}	from	'@angular/http';
+import	{	Observable	}	from	'rxjs/Observable';
+import	{	Employee	}	from	'./employee';
+import	'rxjs/add/operator/map';
+import	'rxjs/add/operator/toPromise';
 
 @Injectable()
 export	class ApplicationServices	{
@@ -37,7 +28,7 @@ export	class ApplicationServices	{
 	}
 }
 
-function handleError(error: any){
+function handleError(error: any)	{
   // log error
   // could be something more sofisticated
   let errorMsg = error.message || `Yikes! There was a problem with our hyperdrive device and we couldn't retrieve your data!`
@@ -45,12 +36,12 @@ function handleError(error: any){
   return Promise.reject(errorMsg);
 }
 
-function mapEmployees(response:Response): Employee{
+function mapEmployees(response:Response): Employee	{
    // toPerson looks just like in the previous example
    return response.json().map(toEmployee);
 }
 
-function toEmployee(r:any): Employee{
+function toEmployee(r:any): Employee	{
   let employee = <Employee>({
   	name: r.name,
   	date_joing:	r.date_joing,
